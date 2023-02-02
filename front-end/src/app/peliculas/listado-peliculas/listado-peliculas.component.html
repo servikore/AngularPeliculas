@@ -1,0 +1,45 @@
+<app-listado-generico [listado]="peliculas">
+  <ng-container cargando> Cargando peliculas... </ng-container>
+  <ng-container contenido>
+    <div class="peliculas-contenedor">
+      <div
+        *ngFor="let pelicula of peliculas; let i = index"
+        class="pelicula-contenedor"
+      >
+        <a [routerLink]="'/pelicula/' + pelicula.id">
+          <img [src]="pelicula.poster" alt="Poster" />
+        </a>
+        <p>
+          <a [routerLink]="'/pelicula/' + pelicula.id">{{
+            pelicula.titulo
+          }}</a>
+        </p>
+        <app-autorizado [rol]="'admin'">
+          <ng-container Autorizado>
+            <div>
+              <a
+                mat-flat-button
+                color="primary"
+                [routerLink]="'/peliculas/editar/' + pelicula.id"
+                >Editar</a
+              >
+              <button
+                type="button"
+                mat-flat-button
+                color="warn"
+                (confirm)="borrar(pelicula.id)"
+                [swal]="{
+                  title: 'Confirmacion',
+                  text: 'Esta seguro que desea borrar el registro?',
+                  showCancelButton: true
+                }"
+              >
+                Borrar
+              </button>
+            </div>
+          </ng-container>
+        </app-autorizado>
+      </div>
+    </div>
+  </ng-container>
+</app-listado-generico>

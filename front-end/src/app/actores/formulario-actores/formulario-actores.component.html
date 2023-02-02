@@ -1,0 +1,29 @@
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+
+<form (submit)="onSubmit()" [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input type="text" formControlName="nombre" matInput>
+    <mat-error>El nombre es requerido</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Fecha de Nacimiento</mat-label>
+    <input formControlName="fechaNacimiento" matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <app-input-img [imagenActual]="modelo?.foto" (archivoSeleccionado)="archivoSeleccionado($event)"></app-input-img>
+
+  <app-input-markdown placeHolder="Biografia" [contenidoMarkdown]="modelo?.biografia"
+    (changeMarkdown)="cambioMarkDown($event)">
+  </app-input-markdown>
+
+  <div>
+    <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">
+      Guardar Cambios
+    </button>
+    <a mat-stroked-button routerLink="/actores">Cancelar</a>
+  </div>
+</form>

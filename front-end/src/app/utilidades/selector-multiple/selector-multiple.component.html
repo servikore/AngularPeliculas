@@ -1,0 +1,22 @@
+<div class="contenedor">
+  <ul>
+    <li
+      *ngFor="let item of NoSeleccionados; let i = index"
+      (click)="seleccionar(item, i)"
+    >
+      {{ item.valor }}
+    </li>
+  </ul>
+  <div class="div_botones">
+    <button type="button" (click)="seleccionarTodo()">>></button>
+    <button type="button" (click)="deseleccionarTodo()"><<</button>
+  </div>
+  <ul>
+    <li
+      *ngFor="let item of Seleccionados; let i = index"
+      (click)="deseleccionar(item, i)"
+    >
+      {{ item.valor }}
+    </li>
+  </ul>
+</div>
